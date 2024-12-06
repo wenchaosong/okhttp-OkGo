@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lzy.okrx2.adapter;
+package com.lzy.okgo.rx.adapter;
 
 import com.lzy.okgo.adapter.AdapterParam;
 import com.lzy.okgo.adapter.Call;
 import com.lzy.okgo.adapter.CallAdapter;
+import com.lzy.okgo.model.Response;
 import com.lzy.okgo.model.Result;
+import com.lzy.okgo.rx.observable.ResultObservable;
 
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 /**
  * ================================================
@@ -32,10 +33,10 @@ import io.reactivex.Flowable;
  * 修订历史：
  * ================================================
  */
-public class FlowableResult<T> implements CallAdapter<T, Flowable<Result<T>>> {
+public class ObservableResult<T> implements CallAdapter<T, Observable<Result<T>>> {
     @Override
-    public Flowable<Result<T>> adapt(Call<T> call, AdapterParam param) {
-        ObservableResult<T> observable = new ObservableResult<>();
-        return observable.adapt(call, param).toFlowable(BackpressureStrategy.LATEST);
+    public Observable<Result<T>> adapt(Call<T> call, AdapterParam param) {
+        Observable<Response<T>> observable = AnalysisParams.analysis(call, param);
+        return new ResultObservable<>(observable);
     }
 }

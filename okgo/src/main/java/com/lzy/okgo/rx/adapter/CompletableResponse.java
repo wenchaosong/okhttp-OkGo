@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lzy.okrx2.adapter;
+package com.lzy.okgo.rx.adapter;
 
 import com.lzy.okgo.adapter.AdapterParam;
 import com.lzy.okgo.adapter.Call;
 import com.lzy.okgo.adapter.CallAdapter;
-import com.lzy.okgo.model.Response;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Completable;
 
 /**
  * ================================================
@@ -31,9 +30,10 @@ import io.reactivex.Observable;
  * 修订历史：
  * ================================================
  */
-public class ObservableResponse<T> implements CallAdapter<T, Observable<Response<T>>> {
+public class CompletableResponse<T> implements CallAdapter<T, Completable> {
     @Override
-    public Observable<Response<T>> adapt(Call<T> call, AdapterParam param) {
-        return AnalysisParams.analysis(call, param);
+    public Completable adapt(Call<T> call, AdapterParam param) {
+        ObservableResponse<T> observable = new ObservableResponse<>();
+        return observable.adapt(call, param).ignoreElements();
     }
 }

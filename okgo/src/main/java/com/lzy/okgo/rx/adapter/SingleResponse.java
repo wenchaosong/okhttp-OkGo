@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lzy.okrx2.adapter;
+package com.lzy.okgo.rx.adapter;
 
 import com.lzy.okgo.adapter.AdapterParam;
 import com.lzy.okgo.adapter.Call;
 import com.lzy.okgo.adapter.CallAdapter;
+import com.lzy.okgo.model.Response;
 
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 
 /**
  * ================================================
@@ -30,10 +31,10 @@ import io.reactivex.Single;
  * 修订历史：
  * ================================================
  */
-public class SingleBody<T> implements CallAdapter<T, Single<T>> {
+public class SingleResponse<T> implements CallAdapter<T, Single<Response<T>>> {
     @Override
-    public Single<T> adapt(Call<T> call, AdapterParam param) {
-        ObservableBody<T> observable = new ObservableBody<>();
+    public Single<Response<T>> adapt(Call<T> call, AdapterParam param) {
+        ObservableResponse<T> observable = new ObservableResponse<>();
         return observable.adapt(call, param).singleOrError();
     }
 }

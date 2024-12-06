@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lzy.okrx2.adapter;
+package com.lzy.okgo.rx.adapter;
 
 import com.lzy.okgo.adapter.AdapterParam;
 import com.lzy.okgo.adapter.Call;
 import com.lzy.okgo.adapter.CallAdapter;
 import com.lzy.okgo.model.Response;
-import com.lzy.okgo.model.Result;
-import com.lzy.okrx2.observable.ResultObservable;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Maybe;
 
 /**
  * ================================================
@@ -33,10 +31,10 @@ import io.reactivex.Observable;
  * 修订历史：
  * ================================================
  */
-public class ObservableResult<T> implements CallAdapter<T, Observable<Result<T>>> {
+public class MaybeResponse<T> implements CallAdapter<T, Maybe<Response<T>>> {
     @Override
-    public Observable<Result<T>> adapt(Call<T> call, AdapterParam param) {
-        Observable<Response<T>> observable = AnalysisParams.analysis(call, param);
-        return new ResultObservable<>(observable);
+    public Maybe<Response<T>> adapt(Call<T> call, AdapterParam param) {
+        ObservableResponse<T> observable = new ObservableResponse<>();
+        return observable.adapt(call, param).singleElement();
     }
 }

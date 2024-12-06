@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lzy.okrx2.adapter;
+package com.lzy.okgo.rx.adapter;
 
 import com.lzy.okgo.adapter.AdapterParam;
 import com.lzy.okgo.adapter.Call;
-import com.lzy.okgo.model.Response;
-import com.lzy.okrx2.observable.CallEnqueueObservable;
-import com.lzy.okrx2.observable.CallExecuteObservable;
+import com.lzy.okgo.adapter.CallAdapter;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Maybe;
 
 /**
  * ================================================
@@ -32,16 +30,10 @@ import io.reactivex.Observable;
  * 修订历史：
  * ================================================
  */
-class AnalysisParams {
-
-    static <T> Observable<Response<T>> analysis(Call<T> call, AdapterParam param) {
-        Observable<Response<T>> observable;
-        if (param == null) param = new AdapterParam();
-        if (param.isAsync) {
-            observable = new CallEnqueueObservable<>(call);
-        } else {
-            observable = new CallExecuteObservable<>(call);
-        }
-        return observable;
+public class MaybeBody<T> implements CallAdapter<T, Maybe<T>> {
+    @Override
+    public Maybe<T> adapt(Call<T> call, AdapterParam param) {
+        ObservableBody<T> observable = new ObservableBody<>();
+        return observable.adapt(call, param).singleElement();
     }
 }

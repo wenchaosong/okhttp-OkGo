@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lzy.okrx2.adapter;
+package com.lzy.okgo.rx.adapter;
 
 import com.lzy.okgo.adapter.AdapterParam;
 import com.lzy.okgo.adapter.Call;
 import com.lzy.okgo.adapter.CallAdapter;
-import com.lzy.okgo.model.Result;
 
-import io.reactivex.Maybe;
+import io.reactivex.rxjava3.core.BackpressureStrategy;
+import io.reactivex.rxjava3.core.Flowable;
 
 /**
  * ================================================
@@ -31,10 +31,10 @@ import io.reactivex.Maybe;
  * 修订历史：
  * ================================================
  */
-public class MaybeResult<T> implements CallAdapter<T, Maybe<Result<T>>> {
+public class FlowableBody<T> implements CallAdapter<T, Flowable<T>> {
     @Override
-    public Maybe<Result<T>> adapt(Call<T> call, AdapterParam param) {
-        ObservableResult<T> observable = new ObservableResult<>();
-        return observable.adapt(call, param).singleElement();
+    public Flowable<T> adapt(Call<T> call, AdapterParam param) {
+        ObservableBody<T> observable = new ObservableBody<>();
+        return observable.adapt(call, param).toFlowable(BackpressureStrategy.LATEST);
     }
 }

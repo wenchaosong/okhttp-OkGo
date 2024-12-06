@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lzy.okrx2.observable;
+package com.lzy.okgo.rx.observable;
 
 import com.lzy.okgo.exception.HttpException;
 import com.lzy.okgo.model.Response;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.exceptions.CompositeException;
-import io.reactivex.exceptions.Exceptions;
-import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.exceptions.CompositeException;
+import io.reactivex.rxjava3.exceptions.Exceptions;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 /**
  * ================================================

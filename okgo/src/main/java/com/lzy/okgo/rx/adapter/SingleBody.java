@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lzy.okrx2.adapter;
+package com.lzy.okgo.rx.adapter;
 
 import com.lzy.okgo.adapter.AdapterParam;
 import com.lzy.okgo.adapter.Call;
 import com.lzy.okgo.adapter.CallAdapter;
 
-import io.reactivex.Maybe;
+import io.reactivex.rxjava3.core.Single;
 
 /**
  * ================================================
@@ -30,10 +30,10 @@ import io.reactivex.Maybe;
  * 修订历史：
  * ================================================
  */
-public class MaybeBody<T> implements CallAdapter<T, Maybe<T>> {
+public class SingleBody<T> implements CallAdapter<T, Single<T>> {
     @Override
-    public Maybe<T> adapt(Call<T> call, AdapterParam param) {
+    public Single<T> adapt(Call<T> call, AdapterParam param) {
         ObservableBody<T> observable = new ObservableBody<>();
-        return observable.adapt(call, param).singleElement();
+        return observable.adapt(call, param).singleOrError();
     }
 }
