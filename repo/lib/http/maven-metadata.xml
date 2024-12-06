@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>lib.http</groupId>
-  <artifactId>okgo</artifactId>
+  <groupId>lib</groupId>
+  <artifactId>http</artifactId>
   <versioning>
     <latest>1.0.0</latest>
     <release>1.0.0</release>
     <versions>
       <version>1.0.0</version>
     </versions>
-    <lastUpdated>20241206032804</lastUpdated>
+    <lastUpdated>20241206034240</lastUpdated>
   </versioning>
 </metadata>

@@ -42,8 +42,8 @@ publishing {
     publications { PublicationContainer publication ->
         maven(MavenPublication) {
             afterEvaluate { artifact(tasks.getByName('bundleReleaseAar')) }
-            groupId = 'lib.http'
-            artifactId = 'okgo'
+            groupId = 'lib'
+            artifactId = 'http'
             version = '1.0.0'
 
             pom.withXml {
